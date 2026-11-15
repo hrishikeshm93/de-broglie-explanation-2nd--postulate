@@ -1,0 +1,980 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>De Broglie's Explanation of Bohr's Second Postulate</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&family=STIX+Two+Text:ital,wght@0,500;1,500&display=swap">
+<style>
+/* Layout: a paged ebook. Sticky chapter rail on top, one chapter per screen, each chapter pairs a short explanation with a live simulation or diagram. Dark ink background with a multicolour accent set (amber orbit, cyan wave, pink nucleus, lime success, violet UI). */
+:root{
+  --ink:#0b1022; --ink2:#10183a; --panel:#141c3b; --panel2:#1b2550; --line:#2c3768;
+  --text:#eaeeff; --muted:#a9b2da;
+  --amber:#ffb347; --cyan:#37d8ff; --pink:#ff5c9a; --lime:#7ef0a8; --violet:#9a86ff;
+  --f-display:'Sora',system-ui,sans-serif; --f-body:'Inter',system-ui,sans-serif; --f-math:'STIX Two Text','Times New Roman',serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{background:var(--ink)}
+body{
+  margin:0; font-family:var(--f-body); font-size:16px; line-height:1.6; color:var(--text);
+  background:
+    radial-gradient(900px 520px at 88% -8%, rgba(154,134,255,.24), transparent 60%),
+    radial-gradient(760px 520px at -8% 18%, rgba(55,216,255,.15), transparent 60%),
+    radial-gradient(700px 500px at 60% 110%, rgba(255,92,154,.12), transparent 60%),
+    var(--ink);
+  background-attachment:fixed;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:0 40px;
+}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--ink);z-index:40}
+[hidden]{display:none!important}
+.wrap{max-width:1040px;margin:0 auto}
+h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:clamp(30px,5.4vw,50px);line-height:1.08;font-weight:800}
+h2{font-size:clamp(22px,3.6vw,31px);line-height:1.2;font-weight:700}
+h3{font-size:18px;line-height:1.3;font-weight:700}
+p{margin:0;max-width:68ch}
+em{font-style:normal;background:linear-gradient(90deg,var(--amber),var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent}
+b,strong{font-weight:600}
+sub,sup{font-size:.62em;line-height:0}
+a{color:var(--cyan)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+
+/* header */
+.top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding-block:18px 14px}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.brand svg{width:42px;height:42px;flex:none}
+.brand b{display:block;font:700 15px var(--f-display)}
+.brand small{color:var(--muted);font-size:12.5px}
+.credit{padding:8px 16px;border-radius:999px;font-size:13px;background:linear-gradient(135deg,rgba(255,179,71,.2),rgba(255,92,154,.16));border:1px solid rgba(255,179,71,.55)}
+.credit b{font-family:var(--f-display);font-weight:700}
+
+/* rail */
+.rail{position:sticky;top:calc(env(safe-area-inset-top,0px) + 8px);z-index:30;background:rgba(11,16,34,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:16px;padding:6px 6px 4px}
+.tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:11px;border:1px solid transparent;background:transparent;color:var(--muted);font:600 13px var(--f-body);cursor:pointer;white-space:nowrap}
+.tab .num{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:12px;background:var(--panel2);color:var(--muted)}
+.tab:hover{color:#fff}
+.tab.on{color:#fff;background:linear-gradient(135deg,rgba(154,134,255,.3),rgba(55,216,255,.18));border-color:rgba(154,134,255,.65)}
+.tab.on .num{background:var(--violet);color:#0b1022}
+.tab.done .num{background:var(--lime);color:#06210f}
+.prog{height:3px;background:var(--line);border-radius:3px;margin:6px 4px 3px;overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--violet),var(--pink));transition:width .4s}
+
+/* pages */
+.page{display:grid;gap:18px;padding-block:22px 6px}
+.card{background:linear-gradient(180deg,var(--panel),var(--ink2));border:1px solid var(--line);border-radius:18px;padding:20px;min-width:0}
+.lead{font-size:clamp(17px,2.4vw,20px);color:var(--muted)}
+.tag{display:inline-block;font:600 11.5px var(--f-body);letter-spacing:.09em;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:rgba(55,216,255,.12);color:var(--cyan);border:1px solid rgba(55,216,255,.35);margin-bottom:10px}
+.tag.amber{background:rgba(255,179,71,.12);color:var(--amber);border-color:rgba(255,179,71,.4)}
+.tag.pink{background:rgba(255,92,154,.12);color:var(--pink);border-color:rgba(255,92,154,.4)}
+.tag.lime{background:rgba(126,240,168,.12);color:var(--lime);border-color:rgba(126,240,168,.4)}
+.callout{border-radius:16px;padding:16px 18px;background:rgba(154,134,255,.1);border:1px solid rgba(154,134,255,.4);min-width:0}
+.callout.lime{background:rgba(126,240,168,.09);border-color:rgba(126,240,168,.4)}
+.callout.amber{background:rgba(255,179,71,.09);border-color:rgba(255,179,71,.4)}
+.callout p+p{margin-top:8px}
+.stack{display:grid;gap:12px}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cols3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.heroGrid{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;align-items:center}
+
+/* equations */
+.eq{font-family:var(--f-math);font-size:clamp(21px,4vw,31px);text-align:center;padding:14px 12px;background:rgba(255,255,255,.03);border:1px dashed var(--line);border-radius:14px;overflow-x:auto;line-height:1.5}
+.eq i{font-style:italic}
+.eq .tagno{font:500 13px var(--f-body);color:var(--muted);margin-left:10px}
+.eq.big{font-size:clamp(26px,5vw,40px)}
+.fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 .15em;line-height:1.2}
+.fr>span:first-child{border-bottom:1.5px solid currentColor;padding:0 .25em}
+.fr>span:last-child{padding:0 .25em}
+.k-c{color:var(--cyan)} .k-a{color:var(--amber)} .k-p{color:var(--pink)} .k-l{color:var(--lime)} .k-v{color:var(--violet)}
+
+/* timeline */
+.tl>div{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px 16px}
+.tl b{display:block;font:800 28px var(--f-display);background:linear-gradient(90deg,var(--amber),var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tl span{color:var(--muted);font-size:14px}
+
+/* sim parts */
+.cv{border-radius:14px;overflow:hidden;background:#0a0f26;border:1px solid var(--line)}
+canvas{display:block;width:100%}
+.controls{display:grid;gap:12px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.lab{display:flex;justify-content:space-between;gap:10px;font-size:13.5px;color:var(--muted);font-weight:500}
+.lab b{color:var(--text);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--cyan);height:28px}
+.btn{font:600 14px var(--f-body);padding:10px 16px;border-radius:12px;border:1px solid var(--line);background:var(--panel2);color:var(--text);cursor:pointer;transition:transform .12s,border-color .12s}
+.btn:hover{border-color:var(--violet)}
+.btn:active{transform:scale(.97)}
+.btn.pri{background:linear-gradient(135deg,var(--violet),var(--cyan));color:#07102a;border:0}
+.btn:disabled{opacity:.45;cursor:default}
+.snap{min-width:42px;padding:8px 12px}
+.snap.on{background:rgba(126,240,168,.2);border-color:var(--lime);color:var(--lime)}
+.reads{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px}
+.read{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:12px;padding:10px 12px;min-width:0}
+.read small{display:block;color:var(--muted);font-size:11.5px;letter-spacing:.07em;text-transform:uppercase}
+.read b{font:700 17px var(--f-display);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.status{padding:12px 14px;border-radius:12px;font-weight:600;font-size:15px}
+.status.ok{background:rgba(126,240,168,.12);border:1px solid rgba(126,240,168,.5);color:var(--lime)}
+.status.bad{background:rgba(255,92,154,.12);border:1px solid rgba(255,92,154,.5);color:#ff8fb8}
+.status.mid{background:rgba(255,179,71,.12);border:1px solid rgba(255,179,71,.5);color:var(--amber)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--muted)}
+.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;background:var(--c,var(--cyan));vertical-align:-1px}
+
+/* mapping */
+.map{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center}
+.map>div{padding:14px;border-radius:14px;background:var(--panel);border:1px solid var(--line);text-align:center;min-width:0}
+.map .arrow{border:0;background:none;font-size:26px;color:var(--amber);padding:0}
+.map small{display:block;color:var(--muted);font-size:12px;letter-spacing:.07em;text-transform:uppercase;margin-bottom:4px}
+
+/* stepper */
+.step{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px;border:1px solid var(--line);border-radius:16px;background:var(--panel);animation:rise .45s both}
+.step .n{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--violet),var(--cyan));color:#07102a;font:700 14px var(--f-display);display:grid;place-items:center}
+.step h3{margin-bottom:8px}
+.step .eq{margin:10px 0}
+.step p{color:var(--muted);font-size:15px}
+.dots{display:flex;gap:6px}
+.dots i{width:26px;height:6px;border-radius:4px;background:var(--line)}
+.dots i.on{background:linear-gradient(90deg,var(--cyan),var(--violet))}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* segments */
+.seg{display:flex;gap:4px;height:44px}
+.seg span{flex:1;display:grid;place-items:center;border-radius:8px;font:700 15px var(--f-math);font-style:italic;color:#07102a}
+
+/* limits */
+.toggle{display:inline-flex;background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:3px;gap:3px}
+.toggle button{font:600 13.5px var(--f-body);padding:8px 14px;border:0;border-radius:9px;background:transparent;color:var(--muted);cursor:pointer}
+.toggle button[aria-pressed=true]{background:linear-gradient(135deg,var(--violet),var(--cyan));color:#07102a}
+svg text{font-family:var(--f-body)}
+.svgbox{background:#0a0f26;border:1px solid var(--line);border-radius:14px;padding:8px}
+.svgbox svg{display:block;width:100%;height:auto}
+.bar{transform-box:fill-box;transform-origin:50% 100%;transition:transform .6s cubic-bezier(.3,.9,.3,1),fill .4s,opacity .4s}
+.chipgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;font-size:13px}
+.chipgrid div{padding:8px 10px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid var(--line)}
+.chipgrid b{display:block}
+
+/* quiz */
+.hud{display:flex;flex-wrap:wrap;gap:10px}
+.hudi{display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:12px;background:var(--panel2);border:1px solid var(--line);font-size:13px;color:var(--muted)}
+.hudi b{font:700 18px var(--f-display);color:var(--text);font-variant-numeric:tabular-nums}
+.hudi svg{width:18px;height:18px;fill:var(--amber)}
+.qbar{height:8px;border-radius:6px;background:var(--line);overflow:hidden}
+.qbar i{display:block;height:100%;background:linear-gradient(90deg,var(--lime),var(--cyan),var(--violet));transition:width .4s}
+.qtext{font:600 clamp(18px,2.8vw,23px)/1.4 var(--f-display)}
+.opts{display:grid;gap:10px}
+.opt{display:flex;gap:12px;align-items:flex-start;text-align:left;width:100%;padding:14px;border-radius:14px;border:1.5px solid var(--line);background:var(--panel);color:var(--text);font:500 16px/1.45 var(--f-body);cursor:pointer;transition:border-color .15s,background .15s}
+.opt:hover:not(:disabled){border-color:var(--violet);background:var(--panel2)}
+.opt .L{flex:none;width:28px;height:28px;border-radius:8px;display:grid;place-items:center;background:var(--panel2);font:700 13px var(--f-display)}
+.opt .m{flex:none;margin-left:auto;font-weight:700}
+.opt.right{border-color:var(--lime);background:rgba(126,240,168,.12)}
+.opt.right .L{background:var(--lime);color:#06210f}
+.opt.wrong{border-color:var(--pink);background:rgba(255,92,154,.12)}
+.opt.wrong .L{background:var(--pink);color:#2a0615}
+.opt:disabled{cursor:default}
+.opt i{font-family:var(--f-math)}
+.fb{padding:14px 16px;border-radius:14px;animation:rise .35s both}
+.fb.ok{background:rgba(126,240,168,.1);border:1px solid rgba(126,240,168,.45)}
+.fb.no{background:rgba(255,92,154,.1);border:1px solid rgba(255,92,154,.45)}
+.fb b{display:block;margin-bottom:4px;font-family:var(--f-display)}
+.stars{display:flex;gap:6px}
+.stars svg{width:34px;height:34px}
+.rankbadge{display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border-radius:999px;background:linear-gradient(135deg,rgba(255,179,71,.22),rgba(255,92,154,.2));border:1px solid rgba(255,179,71,.6);font:700 18px var(--f-display)}
+.recap{display:grid;gap:8px;padding-left:0;list-style:none;margin:0}
+.recap li{padding:10px 14px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid var(--line);font-size:15px}
+
+/* pager + footer */
+.pager{display:flex;justify-content:space-between;gap:10px;padding-block:22px 6px}
+.foot{margin-top:26px;padding:18px;border-radius:16px;border:1px solid var(--line);background:rgba(20,28,59,.6);display:flex;flex-wrap:wrap;gap:8px 18px;justify-content:space-between;align-items:center;font-size:13.5px;color:var(--muted)}
+.foot b{color:var(--text);font-family:var(--f-display)}
+
+@media (max-width:860px){
+  .cols2,.heroGrid{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .cols3{grid-template-columns:1fr}
+  .map{grid-template-columns:1fr}
+  .map .arrow{transform:rotate(90deg);justify-self:center}
+  .card{padding:16px}
+  .step{grid-template-columns:30px 1fr;gap:10px;padding:14px}
+  .credit{font-size:12.5px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="wrap">
+
+<header class="top">
+  <div class="brand">
+    <svg viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke-width="2"><ellipse cx="24" cy="24" rx="20" ry="8" stroke="#37d8ff"/><ellipse cx="24" cy="24" rx="20" ry="8" stroke="#ff5c9a" transform="rotate(60 24 24)"/><ellipse cx="24" cy="24" rx="20" ry="8" stroke="#ffb347" transform="rotate(120 24 24)"/></g><circle cx="24" cy="24" r="4.5" fill="#fff"/></svg>
+    <div><b>Atoms · Class XII Physics</b><small>NCERT Chapter 12 · Section 12.6</small></div>
+  </div>
+  <div class="credit">Interactive e-book created by <b>Hrishikesh M</b> (PGT Physics)</div>
+</header>
+
+<nav class="rail" aria-label="Chapters">
+  <div class="tabs" role="tablist">
+    <button class="tab" data-go="puzzle"><span class="num">1</span>The Puzzle</button>
+    <button class="tab" data-go="string"><span class="num">2</span>Waves on a String</button>
+    <button class="tab" data-go="orbit"><span class="num">3</span>Waves in the Atom</button>
+    <button class="tab" data-go="derive"><span class="num">4</span>Derivation</button>
+    <button class="tab" data-go="verify"><span class="num">5</span>Check with Hydrogen</button>
+    <button class="tab" data-go="limits"><span class="num">6</span>Limitations</button>
+    <button class="tab" data-go="quiz"><span class="num">7</span>Quiz</button>
+  </div>
+  <div class="prog"><i id="progBar"></i></div>
+</nav>
+
+<main>
+
+<!-- 1 THE PUZZLE -->
+<section class="page" id="pg-puzzle">
+  <div class="card">
+    <div class="heroGrid">
+      <div class="stack">
+        <span class="tag amber">Section 12.6</span>
+        <h1>Why does an electron only get <em>special</em> orbits?</h1>
+        <p class="lead">De Broglie's explanation of Bohr's second postulate of quantisation.</p>
+        <p>Bohr's model of the atom worked remarkably well. Yet its second postulate looked like a rule pulled from thin air. This chapter shows how matter waves turn that rule into a natural consequence.</p>
+      </div>
+      <div class="cv"><canvas id="heroCv" aria-label="A standing wave with three wavelengths around a circular orbit"></canvas></div>
+    </div>
+  </div>
+
+  <div class="card stack">
+    <span class="tag">The postulate</span>
+    <h2>Bohr's second postulate</h2>
+    <p>The angular momentum of the electron orbiting the nucleus is <b>quantised</b>. It can only take values that are whole-number multiples of <i>h</i>/2π.</p>
+    <div class="eq big"><i>L</i><sub><i>n</i></sub> = <i>n</i><span class="fr"><span><i>h</i></span><span>2π</span></span>, &nbsp; <i>n</i> = 1, 2, 3, …</div>
+    <p>Why whole numbers only? Bohr did not say. The answer arrived about ten years later.</p>
+    <div class="cols3 tl">
+      <div><b>1913</b><span>Bohr proposes his model with quantised angular momentum.</span></div>
+      <div><b>1923</b><span>Louis de Broglie explains the quantisation using the wave nature of the electron.</span></div>
+      <div><b>1927</b><span>C. J. Davisson and L. H. Germer verify the wave nature of electrons by experiment.</span></div>
+    </div>
+  </div>
+
+  <div class="card stack">
+    <span class="tag lime">Try it</span>
+    <h2>Which angular momenta are allowed?</h2>
+    <p>Slide the marker. Angular momentum <i>L</i> is measured in units of <i>h</i>/2π.</p>
+    <div class="svgbox">
+      <svg id="ladder" viewBox="0 0 700 100" role="img" aria-label="Number line of angular momentum in units of h over 2 pi, with allowed values at whole numbers">
+        <line x1="30" y1="58" x2="670" y2="58" stroke="#2c3768" stroke-width="4" stroke-linecap="round"/>
+        <g id="rungs"></g>
+        <g id="mark"><line x1="0" y1="14" x2="0" y2="58" stroke="#7ef0a8" stroke-width="3" id="markLine"/><circle cx="0" cy="58" r="10" fill="#7ef0a8" id="markDot"/></g>
+      </svg>
+    </div>
+    <input id="ladSlider" type="range" min="0.5" max="6.5" step="0.1" value="2.5" aria-label="Angular momentum in units of h over 2 pi">
+    <div class="status mid" id="ladStatus"></div>
+  </div>
+
+  <div class="card stack">
+    <h2>Your road map</h2>
+    <div class="cols3">
+      <button class="btn" data-go="string">Waves on a string<br><small style="color:var(--muted);font-weight:400">Resonance picks special wavelengths</small></button>
+      <button class="btn" data-go="orbit">Waves in the atom<br><small style="color:var(--muted);font-weight:400">Fit a wave around an orbit</small></button>
+      <button class="btn" data-go="derive">Derivation<br><small style="color:var(--muted);font-weight:400">From 2πr = nλ to L = nh/2π</small></button>
+    </div>
+  </div>
+</section>
+
+<!-- 2 WAVES ON A STRING -->
+<section class="page" id="pg-string" hidden>
+  <div class="stack">
+    <span class="tag">Chapter 2</span>
+    <h2>Waves on a string: only some wavelengths survive</h2>
+    <p class="lead">To understand the electron, first look at something you can pluck.</p>
+  </div>
+
+  <div class="card stack">
+    <div class="cols3">
+      <div class="callout"><b>Pluck it</b><p>A vast number of wavelengths are excited on a string fixed at both ends.</p></div>
+      <div class="callout amber"><b>Round trip</b><p>Each wave runs down the string, reflects, and comes back. That distance is 2<i>L</i>.</p></div>
+      <div class="callout lime"><b>Only some stay</b><p>Waves with nodes at both ends form standing waves. The rest cancel themselves.</p></div>
+    </div>
+    <div class="eq">2<i>L</i> = <i>Xλ</i> &nbsp; (<i>X</i> = 1, 2, 3, … for a standing wave)</div>
+    <p>In words: the round-trip distance must be one wavelength, two wavelengths, or any whole number of wavelengths. Any other wavelength meets itself out of step after reflection, and its amplitude quickly drops to zero.</p>
+  </div>
+
+  <div class="card stack">
+    <span class="tag lime">Simulation</span>
+    <h3>Tune the string</h3>
+    <div class="cv"><canvas id="strCv" aria-label="A string fixed at both ends showing a wave"></canvas></div>
+    <div class="legend"><span style="--c:var(--amber)">Fixed ends</span><span style="--c:var(--cyan)">The wave on the string</span><span style="--c:var(--lime)">Nodes (zero displacement)</span><span style="--c:var(--pink)">Mismatch at the end</span></div>
+    <div class="controls">
+      <div>
+        <div class="lab"><span>Wavelengths in one round trip, <i>X</i> = 2<i>L</i>/<i>λ</i></span><b id="sXlab">3.00</b></div>
+        <input id="sSlider" type="range" min="1" max="5.5" step="0.01" value="3" aria-label="Wavelengths in one round trip">
+      </div>
+      <div class="row"><span style="font-size:13px;color:var(--muted)">Snap to:</span><span class="row" id="sSnaps"></span><button class="btn" id="pluck">Pluck again</button></div>
+    </div>
+    <div class="reads">
+      <div class="read"><small>Round trip</small><b>2L</b></div>
+      <div class="read"><small>Wavelength λ</small><b id="sLam">0.67 L</b></div>
+      <div class="read"><small>2L ÷ λ</small><b id="sRatio">3.00</b></div>
+    </div>
+    <div class="status ok" id="sStatus"></div>
+  </div>
+</section>
+
+<!-- 3 WAVES IN THE ATOM -->
+<section class="page" id="pg-orbit" hidden>
+  <div class="stack">
+    <span class="tag">Chapter 3</span>
+    <h2>Waves in the atom: a string with no ends</h2>
+    <p class="lead">De Broglie pictured the orbiting electron as a wave travelling around the nucleus.</p>
+  </div>
+
+  <div class="card stack">
+    <div class="map">
+      <div><small>String of length L</small>round trip <b>2L</b><br>must equal <b><i>Xλ</i></b></div>
+      <div class="arrow">⇄</div>
+      <div><small>Orbit of radius rₙ</small>circumference <b>2π<i>r</i><sub>n</sub></b><br>must equal <b><i>nλ</i></b></div>
+    </div>
+    <p>A circular orbit has no ends, but the idea is the same. After one trip around, the wave must meet itself exactly in step. The total distance travelled is the circumference, so for the electron in the <i>n</i>th orbit:</p>
+    <div class="eq big">2π<i>r</i><sub><i>n</i></sub> = <i>nλ</i>, &nbsp; <i>n</i> = 1, 2, 3, … <span class="tagno">(12.12)</span></div>
+    <p>Fig. 12.8 in your textbook shows the case <i>n</i> = 4: four de Broglie wavelengths fit into the circumference, so 2π<i>r</i><sub>4</sub> = 4λ.</p>
+  </div>
+
+  <div class="card stack">
+    <span class="tag lime">Simulation</span>
+    <h3>Fit the electron wave onto the orbit</h3>
+    <div class="simgrid cols2">
+      <div class="stack">
+        <div class="cv"><canvas id="orbCv" aria-label="Electron wave drawn around a circular orbit with a nucleus at the centre"></canvas></div>
+        <div class="legend"><span style="--c:var(--cyan)">Electron wave</span><span style="--c:var(--lime)">Nodes</span><span style="--c:var(--pink)">Nucleus / mismatch</span><span style="--c:var(--amber)">Orbit</span></div>
+      </div>
+      <div class="stack">
+        <div>
+          <div class="cv"><canvas id="unrCv" aria-label="The same wave unrolled along the circumference"></canvas></div>
+          <p style="font-size:13px;color:var(--muted);margin-top:6px">Same wave, unrolled along the circumference 2π<i>r</i>.</p>
+        </div>
+        <div class="controls">
+          <div>
+            <div class="lab"><span>Wavelengths around the orbit, <i>m</i> = 2π<i>r</i>/<i>λ</i></span><b id="oMlab">4.00</b></div>
+            <input id="oSlider" type="range" min="1" max="8" step="0.01" value="4" aria-label="Wavelengths around the orbit">
+          </div>
+          <div class="row"><span style="font-size:13px;color:var(--muted)">Snap to n =</span><span class="row" id="oSnaps"></span></div>
+        </div>
+        <div class="reads">
+          <div class="read"><small>Wavelength</small><b id="oLam">1.57 r</b></div>
+          <div class="read"><small>Angular momentum</small><b id="oL">4 × h/2π</b></div>
+        </div>
+        <div class="status ok" id="oStatus"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout lime">
+    <b>The big idea</b>
+    <p>Only resonant standing waves can persist. Orbits where the electron wave does not close on itself destroy themselves by interference. That is why the allowed orbits are <b>quantised</b>.</p>
+  </div>
+</section>
+
+<!-- 4 DERIVATION -->
+<section class="page" id="pg-derive" hidden>
+  <div class="stack">
+    <span class="tag">Chapter 4</span>
+    <h2>Derivation: from waves to Bohr's postulate</h2>
+    <p class="lead">Five short steps. Press the button to reveal each one.</p>
+  </div>
+  <div class="stack" id="steps"></div>
+  <div class="row">
+    <button class="btn" id="stepBack">← Back</button>
+    <button class="btn pri" id="stepNext">Show next step →</button>
+    <button class="btn" id="stepReset">Start over</button>
+    <div class="dots" id="stepDots" aria-hidden="true"></div>
+  </div>
+  <div class="callout lime" id="deriveDone" hidden>
+    <b>What we just showed</b>
+    <p>The condition for a standing electron wave, 2π<i>r</i><sub>n</sub> = <i>nλ</i>, together with <i>λ</i> = <i>h</i>/<i>p</i>, gives exactly the quantum condition Bohr proposed for angular momentum [Eq. 12.15]. This equation is the basis for the discrete orbits and energy levels of the hydrogen atom (Section 12.5).</p>
+    <p>So de Broglie's hypothesis explains Bohr's second postulate: the quantised orbits and energy states come from the <b>wave nature</b> of the electron, and only resonant standing waves persist.</p>
+  </div>
+</section>
+
+<!-- 5 VERIFY -->
+<section class="page" id="pg-verify" hidden>
+  <div class="stack">
+    <span class="tag amber">Chapter 5 · Extension</span>
+    <h2>Check it with real numbers for hydrogen</h2>
+    <p class="lead">Use the Bohr radius and speed for hydrogen. Does 2π<i>r</i><sub>n</sub> really equal <i>nλ</i><sub>n</sub>?</p>
+  </div>
+  <div class="card stack">
+    <div class="simgrid cols2">
+      <div class="cv"><canvas id="vCv" aria-label="Standing wave around the nth orbit"></canvas></div>
+      <div class="stack">
+        <div>
+          <div class="lab"><span>Orbit number <i>n</i></span><b id="vNlab">4</b></div>
+          <input id="vSlider" type="range" min="1" max="6" step="1" value="4" aria-label="Orbit number n">
+        </div>
+        <div class="reads">
+          <div class="read"><small>Radius rₙ</small><b id="vR"></b></div>
+          <div class="read"><small>Speed vₙ</small><b id="vV"></b></div>
+          <div class="read"><small>λₙ = h / m vₙ</small><b id="vLam"></b></div>
+          <div class="read"><small>Circumference 2πrₙ</small><b id="vC"></b></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="lab"><span>The circumference, cut into wavelengths λₙ</span><b id="vCount"></b></div>
+      <div class="seg" id="vSeg"></div>
+    </div>
+    <div class="reads">
+      <div class="read"><small>2πrₙ ÷ λₙ</small><b id="vRatio"></b></div>
+      <div class="read"><small>Angular momentum m vₙ rₙ</small><b id="vL"></b></div>
+    </div>
+    <p style="font-size:13.5px;color:var(--muted)">Values use <i>r</i><sub>n</sub> = <i>n</i>² × 0.529 Å and <i>v</i><sub>n</sub> = 2.19 × 10⁶ / <i>n</i> m/s for hydrogen (Section 12.5). The speed is far below the speed of light, so <i>p</i> = <i>mv</i> is a good approximation. The orbit drawing is not to scale.</p>
+  </div>
+  <div class="callout">
+    <p><b>Notice:</b> the number of wavelengths that fit is always exactly <i>n</i>. The Bohr radius, the electron speed and the de Broglie wavelength fit together with no adjustment.</p>
+  </div>
+</section>
+
+<!-- 6 LIMITATIONS -->
+<section class="page" id="pg-limits" hidden>
+  <div class="stack">
+    <span class="tag pink">Chapter 6</span>
+    <h2>Where Bohr's model falls short</h2>
+    <p class="lead">Bohr's picture treats the electron like a planet on a classical orbit. It predicts the gross features of hydrogenic atoms well, especially the frequencies of radiation they emit or absorb. It also has clear limits.</p>
+    <p style="font-size:14px;color:var(--muted)">Hydrogenic atoms are atoms or ions with a single electron, such as H, He⁺ and Li²⁺.</p>
+  </div>
+
+  <div class="cols2">
+    <div class="card stack">
+      <span class="tag pink">Limitation 1</span>
+      <h3>Only for hydrogenic atoms</h3>
+      <div class="toggle" role="group" aria-label="Choose an atom">
+        <button id="aH" aria-pressed="true">Hydrogen (1 electron)</button>
+        <button id="aHe" aria-pressed="false">Helium (2 electrons)</button>
+      </div>
+      <div class="svgbox">
+        <svg viewBox="0 0 360 220" role="img" aria-label="Forces in a one-electron and a two-electron atom">
+          <circle cx="180" cy="110" r="70" fill="none" stroke="rgba(255,179,71,.5)" stroke-width="1.5" stroke-dasharray="3 6"/>
+          <g hidden id="eeForce">
+            <line x1="215" y1="49" x2="240.6" y2="145" stroke="#ff5c9a" stroke-width="3" stroke-dasharray="6 5"/>
+            <text x="252" y="94" fill="#ff8fb8" font-size="12" font-weight="600">e⁻ – e⁻ repulsion</text>
+            <text x="252" y="110" fill="#ff8fb8" font-size="11">not in Bohr's model</text>
+          </g>
+          <line x1="180" y1="110" x2="215" y2="49" stroke="#37d8ff" stroke-width="3"/>
+          <g hidden id="e2Force"><line x1="180" y1="110" x2="240.6" y2="145" stroke="#37d8ff" stroke-width="3"/></g>
+          <circle cx="180" cy="110" r="15" fill="#ff5c9a"/>
+          <text id="nucTxt" x="180" y="115" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">+e</text>
+          <circle cx="215" cy="49" r="8" fill="#ffb347"/>
+          <g hidden id="e2"><circle cx="240.6" cy="145" r="8" fill="#ffb347"/></g>
+        </svg>
+      </div>
+      <div class="legend"><span style="--c:var(--cyan)">Nucleus–electron attraction (included)</span><span style="--c:var(--pink)">Electron–electron repulsion (missing)</span></div>
+      <p id="aText" style="font-size:15px"></p>
+    </div>
+
+    <div class="card stack">
+      <span class="tag pink">Limitation 2</span>
+      <h3>Cannot explain line intensities</h3>
+      <div class="toggle" role="group" aria-label="Choose what to show">
+        <button id="sB" aria-pressed="true">Bohr's model</button>
+        <button id="sE" aria-pressed="false">Experiment</button>
+      </div>
+      <div class="svgbox"><svg id="specSvg" viewBox="0 0 520 252" role="img" aria-label="Visible lines of the hydrogen emission spectrum"></svg></div>
+      <div class="chipgrid" id="specChips"></div>
+      <div class="status mid" id="specText"></div>
+      <p style="font-size:12.5px;color:var(--muted)">Bar heights are schematic. They show that some lines are strong and others weak.</p>
+    </div>
+  </div>
+
+  <div class="card stack">
+    <h3>Why limitation 1 happens</h3>
+    <p>Bohr's formulation uses only the electric force between the positively charged nucleus and the electron. In an atom with more than one electron, each electron also feels the electric forces from all the other electrons. Attempts to extend the model along Bohr's lines to such atoms did not succeed, and it cannot even handle two-electron atoms like helium.</p>
+    <h3>Why limitation 2 matters</h3>
+    <p>Bohr's model gets the <b>frequencies</b> of the hydrogen lines right. In the emission spectrum, though, some visible lines are weak and others strong. Experiments show that some transitions are more favoured than others, and Bohr's model has no way to account for this.</p>
+  </div>
+
+  <div class="callout amber">
+    <b>The way forward</b>
+    <p>Bohr's model is an elegant picture, but it cannot be generalised to complex atoms. For those we need a new and radical theory, <b>Quantum Mechanics</b>, which gives a more complete picture of atomic structure.</p>
+  </div>
+</section>
+
+<!-- 7 QUIZ -->
+<section class="page" id="pg-quiz" hidden>
+  <div class="stack">
+    <span class="tag lime">Chapter 7</span>
+    <h2>Quiz time: de Broglie meets Bohr</h2>
+  </div>
+  <div class="card stack" id="quiz"></div>
+</section>
+
+<div class="pager">
+  <button class="btn" id="prevBtn">← Previous</button>
+  <button class="btn pri" id="nextBtn">Next chapter →</button>
+</div>
+
+</main>
+
+<footer class="foot">
+  <span>Interactive e-book created by <b>Hrishikesh M</b> (PGT Physics)</span>
+  <span>Based on NCERT Class XII Physics · Chapter 12, Atoms · Section 12.6</span>
+</footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+var $=function(s,r){return (r||document).querySelector(s)};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+var TAU=Math.PI*2;
+var REDUCED=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var PAGES=["puzzle","string","orbit","derive","verify","limits","quiz"];
+var cur="puzzle";
+var visited={};
+
+/* ---------- canvas helpers ---------- */
+var S={};
+function reg(id,ratioFn){S[id]={cv:document.getElementById(id),ratio:ratioFn,ctx:null,w:0,h:0}}
+reg("heroCv",function(){return 0.9});
+reg("strCv",function(w){return w<520?0.62:0.34});
+reg("orbCv",function(){return 0.95});
+reg("unrCv",function(w){return w<420?0.5:0.36});
+reg("vCv",function(){return 0.95});
+function fitAll(){
+  var d=Math.min(window.devicePixelRatio||1,2);
+  Object.keys(S).forEach(function(k){
+    var o=S[k],p=o.cv.parentElement,w=p.clientWidth;
+    if(!w)return;
+    var h=Math.round(w*o.ratio(w));
+    o.cv.style.height=h+"px";
+    o.cv.width=Math.round(w*d);o.cv.height=Math.round(h*d);
+    o.ctx=o.cv.getContext("2d");o.ctx.setTransform(d,0,0,d,0,0);
+    o.w=w;o.h=h;
+  });
+}
+
+/* resonance factor: how much amplitude survives repeated reflections */
+var RR=0.85;
+function resp(x){return (1-RR)/Math.sqrt(1+RR*RR-2*RR*Math.cos(TAU*x))}
+function isInt(x){return Math.abs(x-Math.round(x))<0.02}
+
+/* ---------- drawing: orbit ---------- */
+function drawOrbit(id,m,amp,t,opt){
+  opt=opt||{};
+  var o=S[id];if(!o||!o.ctx)return;
+  var ctx=o.ctx,w=o.w,h=o.h;
+  ctx.clearRect(0,0,w,h);
+  var cx=w/2,cy=h/2,R=Math.min(w,h)*(opt.rf||0.31),a=R*0.2;
+  var ph=(REDUCED||opt.still)?1:Math.cos(t*2.4);
+  var integer=isInt(m);
+  var g=ctx.createRadialGradient(cx,cy,R*0.2,cx,cy,R*1.5);
+  g.addColorStop(0,"rgba(154,134,255,.18)");g.addColorStop(1,"rgba(154,134,255,0)");
+  ctx.fillStyle=g;ctx.fillRect(0,0,w,h);
+  function P(th,k){var r=R+a*k*Math.sin(m*th),ang=th-Math.PI/2;return [cx+r*Math.cos(ang),cy+r*Math.sin(ang)]}
+  var N=520,i,p;
+  /* orbit */
+  ctx.setLineDash([3,6]);ctx.strokeStyle="rgba(255,179,71,.6)";ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.arc(cx,cy,R,0,TAU);ctx.stroke();ctx.setLineDash([]);
+  /* petals */
+  ctx.beginPath();
+  for(i=0;i<=N;i++){p=P(TAU*i/N,amp);i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1])}
+  for(i=N;i>=0;i--){p=P(TAU*i/N,-amp);ctx.lineTo(p[0],p[1])}
+  ctx.fillStyle="rgba(55,216,255,.10)";ctx.fill();
+  ctx.strokeStyle="rgba(154,134,255,.75)";ctx.lineWidth=1.5;
+  [1,-1].forEach(function(s){ctx.beginPath();for(i=0;i<=N;i++){p=P(TAU*i/N,s*amp);i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1])}ctx.stroke()});
+  /* moving wave */
+  ctx.save();ctx.strokeStyle="#37d8ff";ctx.lineWidth=3.5;ctx.shadowColor="#37d8ff";ctx.shadowBlur=12;ctx.lineJoin="round";
+  ctx.beginPath();
+  for(i=0;i<=N;i++){p=P(TAU*i/N,amp*ph);i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1])}
+  ctx.stroke();ctx.restore();
+  /* nodes or seam */
+  if(integer){
+    var n=Math.round(m);
+    ctx.fillStyle="#7ef0a8";
+    for(i=0;i<2*n;i++){var q=P(i*Math.PI/n,0);ctx.beginPath();ctx.arc(q[0],q[1],4.2,0,TAU);ctx.fill()}
+  }else{
+    var s0=P(0,0),s1=P(TAU,amp*ph);
+    if(Math.hypot(s1[0]-s0[0],s1[1]-s0[1])>3){
+      ctx.strokeStyle="#ff5c9a";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(s0[0],s0[1]);ctx.lineTo(s1[0],s1[1]);ctx.stroke();
+    }
+    ctx.fillStyle="#ff5c9a";ctx.beginPath();ctx.arc(s0[0],s0[1],5,0,TAU);ctx.fill();
+    ctx.font="600 12px Inter, sans-serif";ctx.fillStyle="#ff8fb8";ctx.textAlign="center";
+    ctx.fillText("waves don't join here",s0[0],s0[1]-R*0.38-14);
+  }
+  /* radius line */
+  var ang=Math.PI*0.22;
+  ctx.strokeStyle="rgba(255,179,71,.9)";ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+R*Math.cos(ang),cy+R*Math.sin(ang));ctx.stroke();
+  ctx.font="italic 600 16px 'STIX Two Text', serif";ctx.fillStyle="#ffb347";ctx.textAlign="left";
+  ctx.fillText("r",cx+R*0.5*Math.cos(ang)+6,cy+R*0.5*Math.sin(ang)+16);
+  ctx.font="italic 600 11px 'STIX Two Text', serif";ctx.fillText("n",cx+R*0.5*Math.cos(ang)+13,cy+R*0.5*Math.sin(ang)+20);
+  /* nucleus */
+  var nr=Math.max(9,R*0.1);
+  var ng=ctx.createRadialGradient(cx,cy,1,cx,cy,nr*2.4);
+  ng.addColorStop(0,"rgba(255,92,154,.9)");ng.addColorStop(1,"rgba(255,92,154,0)");
+  ctx.fillStyle=ng;ctx.beginPath();ctx.arc(cx,cy,nr*2.4,0,TAU);ctx.fill();
+  ctx.fillStyle="#ff5c9a";ctx.beginPath();ctx.arc(cx,cy,nr,0,TAU);ctx.fill();
+  ctx.fillStyle="#fff";ctx.font="700 13px Inter, sans-serif";ctx.textAlign="center";ctx.fillText("+",cx,cy+4.5);
+  if(!opt.nolabel){ctx.fillStyle="#a9b2da";ctx.font="500 12px Inter, sans-serif";ctx.fillText("Nucleus",cx,cy+nr+18)}
+  /* corner label */
+  ctx.textAlign="left";ctx.font="800 20px Sora, sans-serif";ctx.fillStyle=integer?"#7ef0a8":"#ffb347";
+  ctx.fillText(integer?("n = "+Math.round(m)):("m = "+m.toFixed(2)),14,28);
+}
+
+/* ---------- drawing: string ---------- */
+var st={X:3,amp:1};
+function drawString(t){
+  var o=S.strCv;if(!o.ctx)return;
+  var ctx=o.ctx,w=o.w,h=o.h;ctx.clearRect(0,0,w,h);
+  var px=Math.max(28,w*0.06),x0=px,x1=w-px,cy=h/2,A0=h*0.34;
+  var X=st.X,amp=st.amp,ph=REDUCED?1:Math.cos(t*2.4),integer=isInt(X),i,s,x;
+  ctx.strokeStyle="rgba(169,178,218,.28)";ctx.lineWidth=1;ctx.setLineDash([4,6]);
+  ctx.beginPath();ctx.moveTo(x0,cy);ctx.lineTo(x1,cy);ctx.stroke();ctx.setLineDash([]);
+  function Y(s,k){return cy-A0*k*Math.sin(Math.PI*X*s)}
+  var N=260;
+  if(amp<0.97){
+    ctx.strokeStyle="rgba(154,134,255,.4)";ctx.setLineDash([5,5]);ctx.lineWidth=1.5;
+    ctx.beginPath();for(i=0;i<=N;i++){s=i/N;x=x0+(x1-x0)*s;i?ctx.lineTo(x,Y(s,1)):ctx.moveTo(x,Y(s,1))}ctx.stroke();ctx.setLineDash([]);
+  }
+  ctx.strokeStyle="rgba(154,134,255,.7)";ctx.lineWidth=1.5;
+  ctx.beginPath();for(i=0;i<=N;i++){s=i/N;x=x0+(x1-x0)*s;i?ctx.lineTo(x,Y(s,-amp)):ctx.moveTo(x,Y(s,-amp))}ctx.stroke();
+  ctx.save();ctx.strokeStyle="#37d8ff";ctx.lineWidth=3.5;ctx.shadowColor="#37d8ff";ctx.shadowBlur=12;ctx.lineJoin="round";
+  ctx.beginPath();for(i=0;i<=N;i++){s=i/N;x=x0+(x1-x0)*s;i?ctx.lineTo(x,Y(s,amp*ph)):ctx.moveTo(x,Y(s,amp*ph))}ctx.stroke();ctx.restore();
+  /* mismatch */
+  if(!integer){
+    var ye=Y(1,amp*ph);
+    if(Math.abs(ye-cy)>3){ctx.strokeStyle="#ff5c9a";ctx.lineWidth=3;ctx.setLineDash([4,3]);ctx.beginPath();ctx.moveTo(x1,ye);ctx.lineTo(x1,cy);ctx.stroke();ctx.setLineDash([])}
+  }else{
+    ctx.fillStyle="#7ef0a8";
+    for(i=0;i<=Math.round(X);i++){x=x0+(x1-x0)*i/Math.round(X);ctx.beginPath();ctx.arc(x,cy,4.5,0,TAU);ctx.fill()}
+  }
+  /* wavelength bracket */
+  var lam=(x1-x0)*2/X;
+  if(lam<=(x1-x0)*1.001){
+    var by=h-16;ctx.strokeStyle="#ffb347";ctx.lineWidth=2;ctx.beginPath();
+    ctx.moveTo(x0,by-5);ctx.lineTo(x0,by+5);ctx.moveTo(x0,by);ctx.lineTo(x0+lam,by);ctx.moveTo(x0+lam,by-5);ctx.lineTo(x0+lam,by+5);ctx.stroke();
+    ctx.fillStyle="#ffb347";ctx.font="italic 600 15px 'STIX Two Text', serif";ctx.textAlign="center";ctx.fillText("λ",x0+lam/2,by-8);
+  }
+  /* fixed ends */
+  ctx.strokeStyle="#ffb347";ctx.lineWidth=5;ctx.lineCap="round";
+  ctx.beginPath();ctx.moveTo(x0,cy-24);ctx.lineTo(x0,cy+24);ctx.moveTo(x1,cy-24);ctx.lineTo(x1,cy+24);ctx.stroke();ctx.lineCap="butt";
+  ctx.fillStyle="#ffb347";ctx.beginPath();ctx.arc(x0,cy,6,0,TAU);ctx.arc(x1,cy,6,0,TAU);ctx.fill();
+}
+
+/* ---------- drawing: unrolled orbit ---------- */
+function drawUnroll(m,amp,t){
+  var o=S.unrCv;if(!o.ctx)return;
+  var ctx=o.ctx,w=o.w,h=o.h;ctx.clearRect(0,0,w,h);
+  var px=26,x0=px,x1=w-px,cy=h*0.42,A=h*0.26,ph=REDUCED?1:Math.cos(t*2.4),integer=isInt(m),i,N=300;
+  ctx.strokeStyle="rgba(169,178,218,.28)";ctx.setLineDash([4,6]);ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(x0,cy);ctx.lineTo(x1,cy);ctx.stroke();ctx.setLineDash([]);
+  function Y(s,k){return cy-A*k*Math.sin(TAU*m*s)}
+  ctx.strokeStyle="rgba(154,134,255,.7)";ctx.lineWidth=1.5;
+  ctx.beginPath();for(i=0;i<=N;i++){var s=i/N,x=x0+(x1-x0)*s;i?ctx.lineTo(x,Y(s,-amp)):ctx.moveTo(x,Y(s,-amp))}ctx.stroke();
+  ctx.save();ctx.strokeStyle="#37d8ff";ctx.lineWidth=3;ctx.shadowColor="#37d8ff";ctx.shadowBlur=10;
+  ctx.beginPath();for(i=0;i<=N;i++){var s2=i/N,x2=x0+(x1-x0)*s2;i?ctx.lineTo(x2,Y(s2,amp*ph)):ctx.moveTo(x2,Y(s2,amp*ph))}ctx.stroke();ctx.restore();
+  if(integer){
+    ctx.fillStyle="#7ef0a8";var n=Math.round(m);
+    for(i=0;i<=2*n;i++){var xn=x0+(x1-x0)*i/(2*n);ctx.beginPath();ctx.arc(xn,cy,3.6,0,TAU);ctx.fill()}
+  }else{
+    var ye=Y(1,amp*ph);
+    if(Math.abs(ye-cy)>3){ctx.strokeStyle="#ff5c9a";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x1,ye);ctx.lineTo(x1,cy);ctx.stroke()}
+  }
+  /* start/end markers */
+  ctx.strokeStyle="rgba(255,179,71,.7)";ctx.lineWidth=1.5;ctx.setLineDash([3,4]);
+  ctx.beginPath();ctx.moveTo(x0,cy-A-6);ctx.lineTo(x0,cy+A+6);ctx.moveTo(x1,cy-A-6);ctx.lineTo(x1,cy+A+6);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle="#a9b2da";ctx.font="500 11px Inter, sans-serif";ctx.textAlign="left";ctx.fillText("start",x0+4,cy-A-8);
+  ctx.textAlign="right";ctx.fillText("end (same point)",x1-4,cy-A-8);
+  /* brackets */
+  var lamPx=(x1-x0)/m,by=cy+A+16;
+  ctx.strokeStyle="#ffb347";ctx.lineWidth=2;ctx.beginPath();
+  ctx.moveTo(x0,by-4);ctx.lineTo(x0,by+4);ctx.moveTo(x0,by);ctx.lineTo(x0+lamPx,by);ctx.moveTo(x0+lamPx,by-4);ctx.lineTo(x0+lamPx,by+4);ctx.stroke();
+  ctx.fillStyle="#ffb347";ctx.font="italic 600 14px 'STIX Two Text', serif";ctx.textAlign="center";ctx.fillText("λ",x0+lamPx/2,by+17);
+  var cyb=h-10;ctx.strokeStyle="#ff5c9a";ctx.beginPath();
+  ctx.moveTo(x0,cyb-4);ctx.lineTo(x0,cyb+3);ctx.moveTo(x0,cyb);ctx.lineTo(x1,cyb);ctx.moveTo(x1,cyb-4);ctx.lineTo(x1,cyb+3);ctx.stroke();
+  ctx.fillStyle="#ff8fb8";ctx.fillText("circumference 2πr",(x0+x1)/2,cyb-6);
+}
+
+/* ---------- chapter 1: ladder ---------- */
+(function(){
+  var rungs=$("#rungs"),html="",n,x=function(v){return 30+v*(640/7)};
+  for(n=1;n<=6;n++){html+='<circle cx="'+x(n)+'" cy="58" r="7" fill="#9a86ff"/><text x="'+x(n)+'" y="88" text-anchor="middle" fill="#a9b2da" font-size="13">n = '+n+'</text>'}
+  rungs.innerHTML=html;
+  var sl=$("#ladSlider"),mark=$("#mark"),st1=$("#ladStatus"),ml=$("#markLine"),md=$("#markDot");
+  function upd(){
+    var v=parseFloat(sl.value),r=Math.round(v);
+    if(Math.abs(v-r)<0.06&&r>=1){v=r;sl.value=r}
+    var ok=Math.abs(v-r)<0.001&&r>=1;
+    mark.setAttribute("transform","translate("+x(v)+",0)");
+    ml.setAttribute("stroke",ok?"#7ef0a8":"#ff5c9a");md.setAttribute("fill",ok?"#7ef0a8":"#ff5c9a");
+    st1.className="status "+(ok?"ok":"bad");
+    st1.innerHTML=ok?("L = "+r+" × h/2π: <b>allowed</b>. This is n = "+r+" in Bohr's second postulate."):("L = "+v.toFixed(1)+" × h/2π: <b>not allowed</b>. But the postulate never said why. Chapter 3 answers it.");
+  }
+  sl.addEventListener("input",upd);upd();
+})();
+
+/* ---------- chapter 2: string ---------- */
+(function(){
+  var sl=$("#sSlider"),box=$("#sSnaps");
+  function upd(){
+    var X=st.X,ok=isInt(X),f=resp(X),r=Math.round(X);
+    $("#sXlab").textContent=X.toFixed(2);$("#sRatio").textContent=X.toFixed(2);
+    $("#sLam").textContent=(2/X).toFixed(2)+" L";
+    var s=$("#sStatus");
+    if(ok){s.className="status ok";s.innerHTML="Resonance! Nodes sit at both ends, so the standing wave persists. 2L = "+r+"λ."}
+    else if(f>0.55){s.className="status mid";s.textContent="Almost, but each reflection returns slightly out of step. Watch the amplitude fade."}
+    else{s.className="status bad";s.textContent="Out of step. The reflected waves cancel the original, and the amplitude drops to zero."}
+    $$(".snap",box).forEach(function(b){b.classList.toggle("on",ok&&+b.dataset.n===r)});
+  }
+  function setX(v){
+    var r=Math.round(v);if(Math.abs(v-r)<0.05)v=r;
+    sl.value=v;st.X=v;st.amp=REDUCED?resp(v):1;upd();
+  }
+  for(var n=1;n<=5;n++){(function(n){var b=document.createElement("button");b.className="btn snap";b.dataset.n=n;b.textContent=n;b.addEventListener("click",function(){setX(n)});box.appendChild(b)})(n)}
+  sl.addEventListener("input",function(){setX(parseFloat(sl.value))});
+  $("#pluck").addEventListener("click",function(){st.amp=1});
+  setX(3);
+})();
+
+/* ---------- chapter 3: orbit ---------- */
+var ob={m:4,amp:1};
+(function(){
+  var sl=$("#oSlider"),box=$("#oSnaps");
+  function upd(){
+    var m=ob.m,ok=isInt(m),n=Math.round(m);
+    $("#oMlab").textContent=m.toFixed(2);
+    $("#oLam").textContent=(TAU/m).toFixed(2)+" r";
+    $("#oL").textContent=ok?(n+" × h/2π"):"not allowed";
+    var s=$("#oStatus");
+    if(ok){s.className="status ok";s.innerHTML="The wave closes on itself: 2πr = "+n+"λ. This orbit is allowed (n = "+n+")."}
+    else{s.className="status bad";s.textContent="The wave does not join up after one trip. It interferes with itself and dies out, so no stable orbit."}
+    $$(".snap",box).forEach(function(b){b.classList.toggle("on",ok&&+b.dataset.n===n)});
+  }
+  function setM(v){
+    var r=Math.round(v);if(Math.abs(v-r)<0.05)v=r;
+    sl.value=v;ob.m=v;ob.amp=REDUCED?resp(v):1;upd();
+  }
+  for(var n=1;n<=8;n++){(function(n){var b=document.createElement("button");b.className="btn snap";b.dataset.n=n;b.textContent=n;b.addEventListener("click",function(){setM(n)});box.appendChild(b)})(n)}
+  sl.addEventListener("input",function(){setM(parseFloat(sl.value))});
+  setM(4);
+})();
+
+/* ---------- chapter 4: derivation stepper ---------- */
+(function(){
+  var FR=function(a,b){return '<span class="fr"><span>'+a+'</span><span>'+b+'</span></span>'};
+  var steps=[
+    {h:"Start with the standing-wave condition",
+     eq:'2π<i class="k-a">r</i><sub><i>n</i></sub> = <i>nλ</i>, &nbsp; <i>n</i> = 1, 2, 3, … <span class="tagno">(12.12)</span>',
+     p:"The circumference of the nth orbit must hold a whole number of de Broglie wavelengths. For Fig. 12.8, n = 4, so 2πr = 4λ."},
+    {h:"Bring in de Broglie's relation",
+     eq:'<i class="k-c">λ</i> = '+FR('<i>h</i>','<i>p</i>'),
+     p:"From Chapter 11, a particle with momentum of magnitude p has a wavelength λ = h/p. Here h is Planck's constant."},
+    {h:"Write the momentum of the electron",
+     eq:'<i>p</i> = <i>m</i><i class="k-v">v</i><sub><i>n</i></sub> &nbsp;⇒&nbsp; <i class="k-c">λ</i> = '+FR('<i>h</i>','<i>m</i><i>v</i><sub><i>n</i></sub>'),
+     p:"When the electron's speed is much less than the speed of light, its momentum is simply mass × speed. Here m is the electron mass and vₙ is its speed in the nth orbit."},
+    {h:"Substitute λ into the standing-wave condition",
+     eq:'2π<i class="k-a">r</i><sub><i>n</i></sub> = <i>n</i> '+FR('<i>h</i>','<i>m</i><i>v</i><sub><i>n</i></sub>'),
+     p:"Replace λ in 2πrₙ = nλ by h/(m vₙ). Now the equation connects the orbit radius, the speed and Planck's constant."},
+    {h:"Rearrange to get the angular momentum",
+     eq:'2π<i class="k-a">r</i><sub><i>n</i></sub> × <i>m</i><i>v</i><sub><i>n</i></sub> = <i>nh</i><br><i>m</i><i class="k-v">v</i><sub><i>n</i></sub><i class="k-a">r</i><sub><i>n</i></sub> = <i>n</i> '+FR('<i>h</i>','2π'),
+     p:"Multiply both sides by m vₙ, then divide both sides by 2π. The left side m vₙ rₙ is the angular momentum Lₙ. This is Bohr's quantum condition [Eq. 12.15]."}
+  ];
+  var k=1,box=$("#steps"),dots=$("#stepDots");
+  steps.forEach(function(){var d=document.createElement("i");dots.appendChild(d)});
+  function render(){
+    var html="";
+    for(var i=0;i<k;i++){
+      var s=steps[i];
+      html+='<div class="step"'+(i===k-1?'':' style="animation:none"')+'><div class="n">'+(i+1)+'</div><div><h3>'+s.h+'</h3><div class="eq">'+s.eq+'</div><p>'+s.p+'</p></div></div>';
+    }
+    box.innerHTML=html;
+    $$("i",dots).forEach(function(d,i){d.classList.toggle("on",i<k)});
+    $("#stepBack").disabled=k<=1;
+    $("#stepNext").disabled=k>=steps.length;
+    $("#deriveDone").hidden=k<steps.length;
+  }
+  $("#stepNext").addEventListener("click",function(){if(k<steps.length){k++;render()}});
+  $("#stepBack").addEventListener("click",function(){if(k>1){k--;render()}});
+  $("#stepReset").addEventListener("click",function(){k=1;render()});
+  render();
+})();
+
+/* ---------- chapter 5: hydrogen check ---------- */
+var vn=4;
+(function(){
+  var a0=0.529177e-10,v1=2.187691e6,h=6.62607015e-34,me=9.1093837e-31,hbar=h/TAU;
+  function sci(x){var e=Math.floor(Math.log10(Math.abs(x))),mt=x/Math.pow(10,e);return mt.toFixed(2)+" × 10<sup>"+String(e).replace("-","−")+"</sup>"}
+  var sl=$("#vSlider");
+  function upd(){
+    var n=parseInt(sl.value,10);vn=n;
+    var r=n*n*a0,v=v1/n,lam=h/(me*v),c=TAU*r,L=me*v*r;
+    $("#vNlab").textContent=n;
+    $("#vR").innerHTML=(r*1e10).toFixed(3)+" Å";
+    $("#vV").innerHTML=sci(v)+" m/s";
+    $("#vLam").innerHTML=(lam*1e10).toFixed(3)+" Å";
+    $("#vC").innerHTML=(c*1e10).toFixed(3)+" Å";
+    $("#vCount").textContent=n+" × λₙ = 2πrₙ";
+    var seg="";for(var i=0;i<n;i++)seg+='<span style="background:hsl('+(185+i*26)+',80%,62%)">λ</span>';
+    $("#vSeg").innerHTML=seg;
+    $("#vRatio").textContent=(c/lam).toFixed(3);
+    $("#vL").innerHTML=(L/hbar).toFixed(3)+" × h/2π";
+  }
+  sl.addEventListener("input",upd);upd();
+})();
+
+/* ---------- chapter 6: limitations ---------- */
+(function(){
+  /* atoms */
+  var aH=$("#aH"),aHe=$("#aHe");
+  function atom(he){
+    aH.setAttribute("aria-pressed",!he);aHe.setAttribute("aria-pressed",he);
+    $("#e2").hidden=!he;$("#e2Force").hidden=!he;$("#eeForce").hidden=!he;
+    $("#nucTxt").textContent=he?"+2e":"+e";
+    $("#aText").textContent=he?"Helium has two electrons. Each one feels the nucleus and the other electron. Bohr's model includes only the nucleus–electron force, so it cannot be extended to helium.":"Hydrogen has a single electron. Only the nucleus–electron attraction matters, and Bohr's model handles this case well.";
+  }
+  aH.addEventListener("click",function(){atom(false)});aHe.addEventListener("click",function(){atom(true)});atom(false);
+
+  /* spectrum */
+  var BAL=[{n:"Hδ",nm:410.2,c:"#a77bff",tr:"6 → 2",I:0.2},{n:"Hγ",nm:434.0,c:"#6b86ff",tr:"5 → 2",I:0.4},{n:"Hβ",nm:486.1,c:"#2fd0e6",tr:"4 → 2",I:0.66},{n:"Hα",nm:656.3,c:"#ff5a5a",tr:"3 → 2",I:1}];
+  var sx=function(nm){return 24+(nm-400)/300*472};
+  var svg=$("#specSvg"),NS="http://www.w3.org/2000/svg";
+  var defs='<defs><linearGradient id="spg" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#7a3cff"/><stop offset=".17" stop-color="#3b4bff"/><stop offset=".3" stop-color="#19c5ff"/><stop offset=".43" stop-color="#3de26b"/><stop offset=".6" stop-color="#ffe14a"/><stop offset=".73" stop-color="#ff9a2e"/><stop offset="1" stop-color="#ff3030"/></linearGradient></defs>';
+  var out=defs+'<rect x="24" y="184" width="472" height="22" rx="4" fill="url(#spg)" opacity=".85"/>';
+  [400,500,600,700].forEach(function(t){out+='<line x1="'+sx(t)+'" y1="206" x2="'+sx(t)+'" y2="212" stroke="#a9b2da"/><text x="'+sx(t)+'" y="246" text-anchor="middle" fill="#a9b2da" font-size="12">'+t+' nm</text>'});
+  BAL.forEach(function(b,i){
+    var x=sx(b.nm);
+    out+='<rect class="bar" id="bar'+i+'" x="'+(x-4.5)+'" y="40" width="9" height="140" rx="4" fill="'+b.c+'"/>';
+    out+='<text class="q" id="q'+i+'" x="'+x+'" y="34" text-anchor="middle" fill="#ffb347" font-size="18" font-weight="700">?</text>';
+    out+='<text x="'+x+'" y="226" text-anchor="middle" fill="'+b.c+'" font-size="14" font-weight="700">'+b.n+'</text>';
+  });
+  svg.innerHTML=out;
+  var chips="";BAL.slice().reverse().forEach(function(b){chips+='<div><b style="color:'+b.c+'">'+b.n+' · '+b.nm.toFixed(1)+' nm</b>transition n = '+b.tr+'</div>'});
+  $("#specChips").innerHTML=chips;
+  var sB=$("#sB"),sE=$("#sE");
+  function spec(exp){
+    sB.setAttribute("aria-pressed",!exp);sE.setAttribute("aria-pressed",exp);
+    BAL.forEach(function(b,i){
+      var bar=$("#bar"+i),q=$("#q"+i);
+      bar.style.transform="scaleY("+(exp?b.I:0.5)+")";
+      bar.style.opacity=exp?1:0.55;
+      bar.setAttribute("fill",exp?b.c:"#4a5594");
+      q.style.opacity=exp?0:1;
+    });
+    var s=$("#specText");
+    s.className="status "+(exp?"mid":"ok");
+    s.textContent=exp?"Experiment: some lines are strong and some weak. Some transitions are more favoured than others.":"Bohr's model: every line lands at the correct frequency. How bright each one is? No answer.";
+  }
+  sB.addEventListener("click",function(){spec(false)});sE.addEventListener("click",function(){spec(true)});spec(false);
+})();
+
+/* ---------- chapter 7: quiz ---------- */
+(function(){
+  var Q=[
+    {q:"Louis de Broglie explained Bohr's second postulate (1923) by treating the orbiting electron as:",
+     o:["a tiny charged sphere that radiates energy continuously","a wave that must form a standing wave on the orbit","a photon travelling along the orbit","a particle whose mass changes from orbit to orbit"],
+     a:1,ex:"Only resonant standing waves persist. For a closed circular path, the electron wave must join up with itself after one trip around the orbit."},
+    {q:"A plucked string is fixed at both ends. Which waves survive as standing waves?",
+     o:["Waves of any wavelength","Only the wave with the longest wavelength","Waves whose round-trip distance is a whole number of wavelengths","Waves with an antinode at each fixed end"],
+     a:2,ex:"The round trip 2L must equal λ, 2λ, 3λ, … so that nodes fall at both fixed ends. Other wavelengths interfere with themselves and fade to zero."},
+    {q:"Putting <i>λ</i> = <i>h</i>/(<i>mv</i><sub>n</sub>) into 2π<i>r</i><sub>n</sub> = <i>nλ</i> gives:",
+     o:["<i>mv</i><sub>n</sub><i>r</i><sub>n</sub> = <i>nh</i>/2π","<i>mv</i><sub>n</sub><i>r</i><sub>n</sub> = <i>nh</i>","<i>mv</i><sub>n</sub><i>r</i><sub>n</sub> = 2π<i>h</i>/<i>n</i>","<i>mv</i><sub>n</sub>/<i>r</i><sub>n</sub> = <i>nh</i>/2π"],
+     a:0,ex:"Multiply both sides of 2πrₙ = nh/(m vₙ) by m vₙ, then divide by 2π. This is Bohr's quantum condition, Lₙ = nh/2π."},
+    {q:"Fig. 12.8 shows four de Broglie wavelengths fitting into the circumference of an orbit. The electron's angular momentum there is:",
+     o:["<i>h</i>/2π","4<i>h</i>","<i>h</i>/4π","4 × <i>h</i>/2π"],
+     a:3,ex:"Four wavelengths means n = 4, so L = nh/2π = 4 × h/2π (which is 2h/π)."},
+    {q:"Which statement about the limitations of Bohr's model is correct?",
+     o:["It works for every atom but gives wrong frequencies for hydrogen","It extends easily to helium by adding a second electron","It leaves out electron–electron electric forces, so it fails for multi-electron atoms","It explains the relative intensities of spectral lines but not their frequencies"],
+     a:2,ex:"Bohr's model uses only the nucleus–electron force. It predicts hydrogen's line frequencies but cannot explain why some lines are brighter than others, and it fails for atoms with more than one electron."}
+  ];
+  var el=$("#quiz"),z={i:0,xp:0,streak:0,best:0,right:0,stage:"start",pick:null};
+  var BOLT='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>';
+  var STAR='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.8-6.3 3.8 1.7-7L2 9.2l7.1-.6z"/></svg>';
+  function hud(){return '<div class="hud"><div class="hudi">XP <b>'+z.xp+'</b></div><div class="hudi">'+BOLT+'Streak <b>'+z.streak+'</b></div><div class="hudi">Question <b>'+Math.min(z.i+1,Q.length)+'</b> / '+Q.length+'</div></div>'}
+  function start(){
+    el.innerHTML='<div class="stack"><h3>Quick recap before you start</h3><ul class="recap">'+
+      '<li>Bohr: angular momentum <i>L</i><sub>n</sub> = <i>nh</i>/2π, <i>n</i> = 1, 2, 3, …</li>'+
+      '<li>De Broglie: the electron is a wave with <i>λ</i> = <i>h</i>/<i>p</i>.</li>'+
+      '<li>Only standing (resonant) waves survive, so 2π<i>r</i><sub>n</sub> = <i>nλ</i>.</li>'+
+      '<li>Substituting <i>p</i> = <i>mv</i> gives <i>mv</i><sub>n</sub><i>r</i><sub>n</sub> = <i>nh</i>/2π.</li>'+
+      '<li>Bohr\'s model fails for multi-electron atoms and cannot explain line intensities.</li></ul>'+
+      '<p>5 questions. Correct answers earn 100 XP, plus a 25 XP bonus for every answer in a row. Maximum 750 XP.</p>'+
+      '<div class="row"><button class="btn pri" id="qStart">Start the quiz</button></div></div>';
+    $("#qStart").addEventListener("click",function(){z.i=0;z.xp=0;z.streak=0;z.best=0;z.right=0;z.pick=null;z.stage="q";render()});
+  }
+  function question(){
+    var q=Q[z.i],L="ABCD",answered=z.pick!==null,h='<div class="stack">'+hud()+'<div class="qbar"><i style="width:'+((z.i+(answered?1:0))/Q.length*100)+'%"></i></div><div class="qtext">'+q.q+'</div><div class="opts">';
+    q.o.forEach(function(t,i){
+      var cls="opt";if(answered){if(i===q.a)cls+=" right";else if(i===z.pick)cls+=" wrong"}
+      h+='<button class="'+cls+'" data-i="'+i+'"'+(answered?" disabled":"")+'><span class="L">'+L[i]+'</span><span>'+t+'</span>'+(answered&&i===q.a?'<span class="m" style="color:var(--lime)">Correct</span>':(answered&&i===z.pick?'<span class="m" style="color:#ff8fb8">Not quite</span>':''))+'</button>';
+    });
+    h+='</div>';
+    if(answered){
+      var ok=z.pick===q.a;
+      h+='<div class="fb '+(ok?"ok":"no")+'"><b>'+(ok?("Correct! +"+z.gain+" XP"):"Not this time")+'</b>'+q.ex+'</div>';
+      h+='<div class="row"><button class="btn pri" id="qNext">'+(z.i===Q.length-1?"See my result":"Next question →")+'</button></div>';
+    }
+    h+='</div>';
+    el.innerHTML=h;
+    $$(".opt",el).forEach(function(b){b.addEventListener("click",function(){
+      if(z.pick!==null)return;
+      var i=+b.dataset.i;z.pick=i;
+      if(i===Q[z.i].a){z.streak++;z.best=Math.max(z.best,z.streak);z.right++;z.gain=100+(z.streak-1)*25;z.xp+=z.gain}else{z.streak=0;z.gain=0}
+      render();
+    })});
+    var nx=$("#qNext");if(nx)nx.addEventListener("click",function(){z.pick=null;if(z.i===Q.length-1){z.stage="end"}else{z.i++}render()});
+  }
+  function end(){
+    var r=z.right,rank=r===5?"Resonance Master":r===4?"Standing-Wave Pro":r===3?"Orbit Explorer":"Ground State Learner";
+    var stars="";for(var i=0;i<5;i++)stars+=STAR.replace("<svg","<svg style=\"fill:"+(i<r?"#ffb347":"#2c3768")+"\"");
+    var msg=r===5?"Perfect! You can explain Bohr's second postulate with de Broglie waves.":r>=3?"Good work. Revisit the derivation and limitations to reach the top rank.":"Read chapters 2 to 4 again, then retry. The standing-wave picture is the key.";
+    el.innerHTML='<div class="stack"><h3>Quiz complete</h3><div class="stars" aria-label="'+r+' out of 5">'+stars+'</div>'+
+      '<div><span class="rankbadge">'+rank+'</span></div>'+
+      '<div class="reads"><div class="read"><small>Score</small><b>'+r+' / 5</b></div><div class="read"><small>Total XP</small><b>'+z.xp+' / 750</b></div><div class="read"><small>Best streak</small><b>'+z.best+'</b></div></div>'+
+      '<p>'+msg+'</p><div class="row"><button class="btn pri" id="qAgain">Play again</button><button class="btn" data-go="orbit">Review the simulation</button></div>'+
+      '<div class="callout amber"><p>Interactive e-book created by <b>Hrishikesh M</b> (PGT Physics)</p></div></div>';
+    $("#qAgain").addEventListener("click",function(){z.stage="start";render()});
+    $$("[data-go]",el).forEach(function(b){b.addEventListener("click",function(){show(b.dataset.go)})});
+  }
+  function render(){if(z.stage==="start")start();else if(z.stage==="q")question();else end()}
+  render();
+})();
+
+/* ---------- navigation ---------- */
+function show(id){
+  if(PAGES.indexOf(id)<0)id="puzzle";
+  cur=id;visited[id]=true;
+  $$(".page").forEach(function(p){p.hidden=p.id!=="pg-"+id});
+  $$(".tab").forEach(function(t){
+    var on=t.dataset.go===id;
+    t.classList.toggle("on",on);t.classList.toggle("done",!on&&!!visited[t.dataset.go]);
+    if(on){t.setAttribute("aria-current","page");try{t.scrollIntoView({inline:"center",block:"nearest"})}catch(e){}}else t.removeAttribute("aria-current");
+  });
+  $("#progBar").style.width=(Object.keys(visited).length/PAGES.length*100)+"%";
+  var i=PAGES.indexOf(id);
+  $("#prevBtn").style.visibility=i>0?"visible":"hidden";
+  $("#nextBtn").style.visibility=i<PAGES.length-1?"visible":"hidden";
+  $("#nextBtn").textContent=i<PAGES.length-1?("Next: "+$$(".tab")[i+1].textContent.replace(/^\d/,"")+" →"):"";
+  try{if(location.hash!=="#"+id)location.hash=id}catch(e){}
+  fitAll();
+  try{window.scrollTo(0,0)}catch(e){}
+}
+$$("[data-go]").forEach(function(b){b.addEventListener("click",function(){show(b.dataset.go)})});
+$("#prevBtn").addEventListener("click",function(){show(PAGES[Math.max(0,PAGES.indexOf(cur)-1)])});
+$("#nextBtn").addEventListener("click",function(){show(PAGES[Math.min(PAGES.length-1,PAGES.indexOf(cur)+1)])});
+window.addEventListener("hashchange",function(){var id=location.hash.slice(1);if(id&&id!==cur&&PAGES.indexOf(id)>=0)show(id)});
+window.addEventListener("resize",fitAll);
+
+/* ---------- animation loop ---------- */
+var last=0;
+function loop(ts){
+  var t=ts/1000,dt=Math.min(0.05,t-last);last=t;
+  var k=1-Math.exp(-dt*2.2);
+  if(cur==="puzzle")drawOrbit("heroCv",3,1,t,{rf:0.33,nolabel:true});
+  else if(cur==="string"){st.amp=REDUCED?resp(st.X):st.amp+(resp(st.X)-st.amp)*k;drawString(t)}
+  else if(cur==="orbit"){ob.amp=REDUCED?resp(ob.m):ob.amp+(resp(ob.m)-ob.amp)*k;drawOrbit("orbCv",ob.m,ob.amp,t);drawUnroll(ob.m,ob.amp,t)}
+  else if(cur==="verify")drawOrbit("vCv",vn,1,t);
+  requestAnimationFrame(loop);
+}
+var start=location.hash.slice(1);
+show(PAGES.indexOf(start)>=0?start:"puzzle");
+requestAnimationFrame(loop);
+})();
+</script>
+
+</body></html>
